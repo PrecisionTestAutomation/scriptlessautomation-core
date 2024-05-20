@@ -31,8 +31,8 @@
 
   <scm>
     <url>https://github.com/PrecisionTestAutomation/ScriptlessAutomation-OpenSource</url>
-    <connection>scm:git:https://github.com/PrecisionTestAutomation/ScriptlessAutomation-OpenSource.git</connection>
-    <developerConnection>scm:git:git@github.com:PrecisionTestAutomation/ScriptlessAutomation-OpenSource.git</developerConnection>
+    <connection>scm:git:https://github.com/PrecisionTestAutomation/scriptlessautomation-core.git</connection>
+    <developerConnection>scm:git:git@github.com:PrecisionTestAutomation/scriptlessautomation-core.git</developerConnection>
     <tag>testing</tag>
   </scm>
 
