@@ -62,7 +62,20 @@ public class GenerateTestNg {
     }
 
     private void createXmlFiles(XmlSuite xmlSuite) {
-        String testNgFilePath = PROJECT_DIRECTORY + File.separator + "target" + File.separator + "testngenerator.xml";
+        String targetDirectoryPath = PROJECT_DIRECTORY + File.separator + "target";
+        String testNgFilePath = targetDirectoryPath + File.separator + "testngenerator.xml";
+
+        // Ensure the target directory exists
+        File targetDirectory = new File(targetDirectoryPath);
+        if (!targetDirectory.exists()) {
+            boolean dirsCreated = targetDirectory.mkdirs();
+            if (!dirsCreated) {
+                System.err.println("Failed to create target directory: " + targetDirectoryPath);
+                return;
+            }
+        }
+
+        // Write the XML file
         try (FileWriter writer = new FileWriter(testNgFilePath)) {
             writer.write(xmlSuite.toXml());
             writer.flush();

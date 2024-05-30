@@ -101,4 +101,12 @@ public class AutomationAsserts {
                 stringsMatch ? elementName + " -> Actual:<b><i>" + actual + "</i></b> contains Expected:<b><i>" + expected + "</i></b>" :
                         elementName + " -> Actual:<i><b>" + actual + "</i></b> does not contain Expected:<i><b>" + expected + "</i></b>");
     }
+
+
+    public void assertEquals(String elementName, Object actual, Object expected) {
+        boolean stringsMatch = actual.equals(expected);
+        test.log(stringsMatch ? Status.PASS : Status.FAIL,
+                stringsMatch ? elementName + " -> Actual:<b><i>" + actual + "</i></b> match with Expected:<b><i>" + expected + "</i></b>" :
+                        elementName + " -> Actual:<i><b>" + actual + "</i></b> doesn't match with Expected:<i><b>" + expected + "</i></b>");
+    }
 }
