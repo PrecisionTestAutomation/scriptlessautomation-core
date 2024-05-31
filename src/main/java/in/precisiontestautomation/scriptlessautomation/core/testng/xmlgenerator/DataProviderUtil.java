@@ -49,6 +49,9 @@ public class DataProviderUtil {
 
                     if(sectionList.contains("ALL") || sectionList.contains(file.getName())) {
                         File[] directories = file.listFiles();
+                        if (directories == null) {
+                            throw new IllegalArgumentException("Please create directories under `test_case_flows` before adding test cases. Ensure each directory corresponds to a specific feature.");
+                        }
                         Arrays.stream(directories)
                                 .filter(e -> !e.getName().startsWith(".DS")) // Filter out .DS_Store files or similar
                                 .filter(e -> e.isFile() && e.getName().toLowerCase().endsWith(".csv")) // Ensure it's a file and ends with .csv

@@ -4,7 +4,7 @@
 
   <groupId>in.precisiontestautomation.scriptlessautomation</groupId>
   <artifactId>scriptlessautomation-core</artifactId>
-  <version>1.2.3</version>
+  <version>1.2.4</version>
   <packaging>jar</packaging>
 
   <name>Scriptless Automation</name>
@@ -30,7 +30,7 @@
   </developers>
 
   <scm>
-    <url>https://github.com/PrecisionTestAutomation/ScriptlessAutomation-OpenSource</url>
+    <url>https://github.com/PrecisionTestAutomation/scriptlessautomation-core</url>
     <connection>scm:git:https://github.com/PrecisionTestAutomation/scriptlessautomation-core.git</connection>
     <developerConnection>scm:git:git@github.com:PrecisionTestAutomation/scriptlessautomation-core.git</developerConnection>
     <tag>testing</tag>
