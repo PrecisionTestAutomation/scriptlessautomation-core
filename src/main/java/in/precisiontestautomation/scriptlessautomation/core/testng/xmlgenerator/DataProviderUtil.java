@@ -47,7 +47,7 @@ public class DataProviderUtil {
 
                     List<String> sectionList = Arrays.asList(TEST_TRAIL_SECTIONS.toUpperCase().split(","));
 
-                    if(sectionList.contains("ALL") || sectionList.contains(file.getName())) {
+                    if(sectionList.contains("ALL") || sectionList.contains(file.getName().toUpperCase())) {
                         File[] directories = file.listFiles();
                         if (directories == null) {
                             throw new IllegalArgumentException("Please create directories under `test_case_flows` before adding test cases. Ensure each directory corresponds to a specific feature.");
