@@ -1,7 +1,10 @@
 package in.precisiontestautomation.scriptlessautomation.core.utils;
 
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
+
+import java.util.Objects;
 
 
 /**
@@ -31,11 +34,11 @@ public class AutomationAsserts {
      * @param actual a {@link String} object
      * @param expected a {@link String} object
      */
-    public void assertEquals(String elementName, String actual, String expected) {
+    public void assertEquals(String elementName, String actual, String expected, boolean screenShotCapture, String imageBase64) {
         boolean stringsMatch = actual.replaceAll("\n", " ").equals(expected);
         test.log(stringsMatch ? Status.PASS : Status.FAIL,
-                stringsMatch ? elementName + " -> Actual:<b><i>" + actual + "</i></b> match with Expected:<b><i>" + expected + "</i></b>" :
-                        elementName + " -> Actual:<i><b>" + actual + "</i></b> doesn't match with Expected:<i><b>" + expected + "</i></b>");
+                stringsMatch ? elementName + " -> Actual:<b><i>" + actual + "</i></b> match with Expected:<b><i>" + expected + "</i></b>" : elementName + " -> Actual:<i><b>" + actual + "</i></b> doesn't match with Expected:<i><b>" + expected + "</i></b>",
+                screenShotCapture ? MediaEntityBuilder.createScreenCaptureFromBase64String(Objects.requireNonNull(imageBase64)).build() : null);
     }
 
     /**
@@ -46,9 +49,10 @@ public class AutomationAsserts {
      * @param successMessage a {@link String} object
      * @param failureMessage a {@link String} object
      */
-    public void assertTrue(String elementName, boolean trueCondition, String successMessage, String failureMessage) {
+    public void assertTrue(String elementName, boolean trueCondition, String successMessage, String failureMessage,boolean screenShotCapture, String imageBase64) {
         test.log(trueCondition ? Status.PASS : Status.FAIL,
-                trueCondition ? elementName + " -> " + successMessage : elementName + " -> " + failureMessage);
+                trueCondition ? elementName + " -> " + successMessage : elementName + " -> " + failureMessage,
+                screenShotCapture ? MediaEntityBuilder.createScreenCaptureFromBase64String(Objects.requireNonNull(imageBase64)).build() : null);
     }
 
     /**
@@ -67,11 +71,11 @@ public class AutomationAsserts {
      * @param actual a {@link String} object
      * @param expected a {@link String} object
      */
-    public void assertNotEquals(String elementName, String actual, String expected) {
+    public void assertNotEquals(String elementName, String actual, String expected,boolean screenShotCapture, String imageBase64) {
         boolean stringsMatch = !actual.replaceAll("\n", " ").equals(expected);
         test.log(stringsMatch ? Status.PASS : Status.FAIL,
-                stringsMatch ? elementName + " -> Actual:<b><i>" + actual + "</i></b> does not match with Expected:<b><i>" + expected + "</i></b>" :
-                        elementName + " -> Actual:<i><b>" + actual + "</i></b> matches with Expected:<i><b>" + expected + "</i></b>");
+                stringsMatch ? elementName + " -> Actual:<b><i>" + actual + "</i></b> match with Expected:<b><i>" + expected + "</i></b>" : elementName + " -> Actual:<i><b>" + actual + "</i></b> doesn't match with Expected:<i><b>" + expected + "</i></b>",
+                screenShotCapture ? MediaEntityBuilder.createScreenCaptureFromBase64String(Objects.requireNonNull(imageBase64)).build() : null);
     }
 
     /**
@@ -81,11 +85,11 @@ public class AutomationAsserts {
      * @param actual a {@link String} object
      * @param expected a {@link String} object
      */
-    public void assertEqualsIgnore(String elementName, String actual, String expected) {
+    public void assertEqualsIgnore(String elementName, String actual, String expected,boolean screenShotCapture, String imageBase64) {
         boolean stringsMatch = actual.replaceAll("\n", " ").equalsIgnoreCase(expected);
         test.log(stringsMatch ? Status.PASS : Status.FAIL,
-                stringsMatch ? elementName + " -> Actual:<b><i>" + actual + "</i></b> match with Expected:<b><i>" + expected + "</i></b>" :
-                        elementName + " -> Actual:<i><b>" + actual + "</i></b> doesn't match with Expected:<i><b>" + expected + "</i></b>");
+                stringsMatch ? elementName + " -> Actual:<b><i>" + actual + "</i></b> match with Expected:<b><i>" + expected + "</i></b>" : elementName + " -> Actual:<i><b>" + actual + "</i></b> doesn't match with Expected:<i><b>" + expected + "</i></b>",
+                screenShotCapture ? MediaEntityBuilder.createScreenCaptureFromBase64String(Objects.requireNonNull(imageBase64)).build() : null);
     }
 
     /**
@@ -95,11 +99,25 @@ public class AutomationAsserts {
      * @param actual a {@link String} object
      * @param expected a {@link String} object
      */
-    public void assertContains(String elementName, String actual, String expected) {
+    public void assertContains(String elementName, String actual, String expected,boolean screenShotCapture, String imageBase64) {
         boolean stringsMatch = actual.replaceAll("\n", " ").contains(expected);
         test.log(stringsMatch ? Status.PASS : Status.FAIL,
-                stringsMatch ? elementName + " -> Actual:<b><i>" + actual + "</i></b> contains Expected:<b><i>" + expected + "</i></b>" :
-                        elementName + " -> Actual:<i><b>" + actual + "</i></b> does not contain Expected:<i><b>" + expected + "</i></b>");
+                stringsMatch ? elementName + " -> Actual:<b><i>" + actual + "</i></b> contains with Expected:<b><i>" + expected + "</i></b>" : elementName + " -> Actual:<i><b>" + actual + "</i></b> doesn't contains with Expected:<i><b>" + expected + "</i></b>",
+                screenShotCapture ? MediaEntityBuilder.createScreenCaptureFromBase64String(Objects.requireNonNull(imageBase64)).build() : null);
+    }
+
+    public void assertEquals(String elementName, Object actual, Object expected,boolean screenShotCapture, String imageBase64) {
+        boolean stringsMatch = actual.equals(expected);
+        test.log(stringsMatch ? Status.PASS : Status.FAIL,
+                stringsMatch ? elementName + " -> Actual:<b><i>" + actual + "</i></b> match with Expected:<b><i>" + expected + "</i></b>" :
+                        elementName + " -> Actual:<i><b>" + actual + "</i></b> doesn't match with Expected:<i><b>" + expected + "</i></b>",
+                screenShotCapture ? MediaEntityBuilder.createScreenCaptureFromBase64String(Objects.requireNonNull(imageBase64)).build() : null);
+    }
+
+    public void assertFalse(String elementName, boolean trueCondition, String successMessage, String failureMessage,boolean screenShotCapture, String imageBase64) {
+        test.log(!trueCondition ? Status.PASS : Status.FAIL,
+                !trueCondition ? elementName + " -> " + successMessage : elementName + " -> " + failureMessage,
+                screenShotCapture ? MediaEntityBuilder.createScreenCaptureFromBase64String(Objects.requireNonNull(imageBase64)).build() : null);
     }
 
 
