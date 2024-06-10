@@ -119,4 +119,14 @@ public class AutomationAsserts {
                 !trueCondition ? elementName + " -> " + successMessage : elementName + " -> " + failureMessage,
                 screenShotCapture ? MediaEntityBuilder.createScreenCaptureFromBase64String(Objects.requireNonNull(imageBase64)).build() : null);
     }
+
+    public void assertFalse(String elementName, String failureMessage,boolean screenShotCapture, String imageBase64) {
+        test.log(Status.FAIL, elementName + " -> " + failureMessage,
+                screenShotCapture ? MediaEntityBuilder.createScreenCaptureFromBase64String(Objects.requireNonNull(imageBase64)).build() : null);
+    }
+
+    public void assertTrue(String elementName, String successMessage,boolean screenShotCapture, String imageBase64) {
+        test.log(Status.PASS, elementName + " -> " + successMessage,
+                screenShotCapture ? MediaEntityBuilder.createScreenCaptureFromBase64String(Objects.requireNonNull(imageBase64)).build() : null);
+    }
 }
