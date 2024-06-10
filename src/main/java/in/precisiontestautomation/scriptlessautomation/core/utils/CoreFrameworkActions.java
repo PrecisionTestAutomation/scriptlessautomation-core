@@ -1,5 +1,6 @@
 package in.precisiontestautomation.scriptlessautomation.core.utils;
 
+import java.io.File;
 import java.util.Objects;
 
 /**
@@ -25,6 +26,16 @@ public class CoreFrameworkActions {
         return Objects.isNull(System.getProperty(variable)) ?
                 null :
                 System.getProperty(variable).replaceAll("%20", " ");
+    }
+
+    public static String getSuiteName(String filePath) {
+        File file = new File(filePath);
+        File parent = file.getParentFile();
+        while (parent != null && !parent.getName().equals("test_case_flows")) {
+            file = parent;
+            parent = file.getParentFile();
+        }
+        return parent != null ? file.getName() : "";
     }
 
 }
