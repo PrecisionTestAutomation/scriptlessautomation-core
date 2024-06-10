@@ -18,11 +18,10 @@ public class RetryTestClass implements IRetryAnalyzer {
     /**
      * {@inheritDoc}
      *
-     * Retry failed test case : method leveel
+     * Retry failed test case : method level
      */
     public boolean retry(ITestResult result) {
         if (retryCnt < TestNgConfig.MAX_RETRY_CNT) {
-            //System.out.println("Retrying " + result.getName() + " again and the count is " + (retryCnt+1));
             result.setStatus(3);
             retryCnt++;
             return true;

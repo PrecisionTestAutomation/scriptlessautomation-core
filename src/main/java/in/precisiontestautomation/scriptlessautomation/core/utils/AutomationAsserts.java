@@ -120,11 +120,13 @@ public class AutomationAsserts {
                 screenShotCapture ? MediaEntityBuilder.createScreenCaptureFromBase64String(Objects.requireNonNull(imageBase64)).build() : null);
     }
 
+    public void assertFalse(String elementName, String failureMessage,boolean screenShotCapture, String imageBase64) {
+        test.log(Status.FAIL, elementName + " -> " + failureMessage,
+                screenShotCapture ? MediaEntityBuilder.createScreenCaptureFromBase64String(Objects.requireNonNull(imageBase64)).build() : null);
+    }
 
-    public void assertEquals(String elementName, Object actual, Object expected) {
-        boolean stringsMatch = actual.equals(expected);
-        test.log(stringsMatch ? Status.PASS : Status.FAIL,
-                stringsMatch ? elementName + " -> Actual:<b><i>" + actual + "</i></b> match with Expected:<b><i>" + expected + "</i></b>" :
-                        elementName + " -> Actual:<i><b>" + actual + "</i></b> doesn't match with Expected:<i><b>" + expected + "</i></b>");
+    public void assertTrue(String elementName, String successMessage,boolean screenShotCapture, String imageBase64) {
+        test.log(Status.PASS, elementName + " -> " + successMessage,
+                screenShotCapture ? MediaEntityBuilder.createScreenCaptureFromBase64String(Objects.requireNonNull(imageBase64)).build() : null);
     }
 }
