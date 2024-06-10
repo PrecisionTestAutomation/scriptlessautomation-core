@@ -44,7 +44,6 @@ public class DataProviderUtil {
                 .forEachRemaining(param -> {
                     String fileDirectory = param.getValue();
                     File file = new File(fileDirectory);
-                    //File[] directories = file.listFiles();
                     List<File> allFiles = new ArrayList<>();
                     fetchFilesRecursively(file, allFiles);
                     List<String> sectionList = Arrays.asList(TEST_TRAIL_SECTIONS.toUpperCase().split(","));
