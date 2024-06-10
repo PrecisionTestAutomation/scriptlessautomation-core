@@ -44,15 +44,15 @@ public class DataProviderUtil {
                 .forEachRemaining(param -> {
                     String fileDirectory = param.getValue();
                     File file = new File(fileDirectory);
-
+                    //File[] directories = file.listFiles();
+                    List<File> allFiles = new ArrayList<>();
+                    fetchFilesRecursively(file, allFiles);
                     List<String> sectionList = Arrays.asList(TEST_TRAIL_SECTIONS.toUpperCase().split(","));
-
                     if(sectionList.contains("ALL") || sectionList.contains(file.getName().toUpperCase())) {
-                        File[] directories = file.listFiles();
-                        if (directories == null) {
+                        if (Objects.isNull(allFiles) || allFiles.isEmpty()) {
                             throw new IllegalArgumentException("Please create directories under `test_case_flows` before adding test cases. Ensure each directory corresponds to a specific feature.");
                         }
-                        Arrays.stream(directories)
+                        allFiles.stream()
                                 .filter(e -> !e.getName().startsWith(".DS")) // Filter out .DS_Store files or similar
                                 .filter(e -> e.isFile() && e.getName().toLowerCase().endsWith(".csv")) // Ensure it's a file and ends with .csv
                                 .forEach(directory -> {
@@ -104,5 +104,21 @@ public class DataProviderUtil {
         }
 
         return data;
+    }
+
+
+    private static void fetchFilesRecursively(File directory, List<File> allFiles) {
+        if (directory.isDirectory()) {
+            File[] files = directory.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isDirectory()) {
+                        fetchFilesRecursively(file, allFiles);
+                    } else {
+                        allFiles.add(file);
+                    }
+                }
+            }
+        }
     }
 }
