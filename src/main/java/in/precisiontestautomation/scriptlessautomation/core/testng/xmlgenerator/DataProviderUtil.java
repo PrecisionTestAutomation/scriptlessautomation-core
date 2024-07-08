@@ -54,6 +54,7 @@ public class DataProviderUtil {
                         allFiles.stream()
                                 .filter(e -> !e.getName().startsWith(".DS")) // Filter out .DS_Store files or similar
                                 .filter(e -> e.isFile() && e.getName().toLowerCase().endsWith(".csv")) // Ensure it's a file and ends with .csv
+                                .filter(e -> e.isFile() && e.getName().toLowerCase().endsWith(".feature")) // Ensure it's a file and ends with .csv
                                 .forEach(directory -> {
                                     // Add the absolute path of the file to the list
                                     list.add(directory.getAbsoluteFile().toString());
