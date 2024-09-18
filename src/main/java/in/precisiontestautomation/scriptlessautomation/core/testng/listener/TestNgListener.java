@@ -18,7 +18,7 @@ import org.testng.ITestResult;
  */
 public class TestNgListener implements ITestListener {
 
-    private ThreadLocal<String> testName = new ThreadLocal<>();
+    private final ThreadLocal<String> testName = new ThreadLocal<>();
 
     /**
      * {@inheritDoc}
