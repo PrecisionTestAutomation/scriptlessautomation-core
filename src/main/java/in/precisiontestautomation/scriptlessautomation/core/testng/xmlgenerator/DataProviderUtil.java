@@ -2,6 +2,7 @@ package in.precisiontestautomation.scriptlessautomation.core.testng.xmlgenerator
 
 import in.precisiontestautomation.scriptlessautomation.core.configurations.TestNgConfig;
 import in.precisiontestautomation.scriptlessautomation.core.exceptionhandling.PrecisionTestException;
+import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.DataProvider;
 
@@ -48,7 +49,7 @@ public class DataProviderUtil {
                     fetchFilesRecursively(file, allFiles);
                     List<String> sectionList = Arrays.asList(TEST_TRAIL_SECTIONS.toUpperCase().split(","));
                     if(sectionList.contains("ALL") || sectionList.contains(file.getName().toUpperCase())) {
-                        if (Objects.isNull(allFiles) || allFiles.isEmpty()) {
+                        if (allFiles.isEmpty()) {
                             throw new IllegalArgumentException("Please create directories under `test_case_flows` before adding test cases. Ensure each directory corresponds to a specific feature.");
                         }
                         allFiles.stream()
@@ -73,7 +74,8 @@ public class DataProviderUtil {
                     })
                     .collect(Collectors.toList()));
             if (list.isEmpty()) {
-                throw new PrecisionTestException("Given TestRail Id/Ids either invalid or nor implemented in the automation");
+                System.err.println("Error: The provided TestCase ID(s)["+ TestNgConfig.TEST_IDS +"] are either invalid or not yet implemented in the automation framework. \nPlease refer to the following guide for instructions on creating test files: https://docs.precisiontestautomation.in/scriptlessautomation/automation-import-notes/points-to-remember#testcase-name-syntax");
+                System.exit(1); // This will immediately terminate the JVM
             }
         }
 
